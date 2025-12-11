@@ -12,7 +12,9 @@ date_time2 = datetime.datetime(2025, 12, 10, 00, 00, 00)
 difference = date_time2 - date_time1
 
 # subtract 6 hours for each full day in the difference
-final_res =  difference - datetime.timedelta(hours=6 * difference.days)
+res =   datetime.timedelta(hours=6 * difference.days)
+# print(res)
+final_res = difference - res
 
 print("Original difference:", difference)
 print("Final result:", final_res)
