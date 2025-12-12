@@ -6,15 +6,19 @@ python intervals module)
 
 import datetime
 
-date_time1 = datetime.datetime(2025, 12, 1, 00, 00, 00)
-date_time2 = datetime.datetime(2025, 12, 10, 00, 00, 00)
+date_time1 = datetime.datetime(2025, 12, 9, 22, 00, 00)
+date_time2 = datetime.datetime(2025, 12, 10, 8, 00, 00)
 
-difference = date_time2 - date_time1
+night_start = datetime.time(0, 0, 0)  # 12 AM
+night_end = datetime.time(6, 0, 0)    # 6 AM
 
-# subtract 6 hours for each full day in the difference
-res =   datetime.timedelta(hours=6 * difference.days)
-# print(res)
-final_res = difference - res
+diff = date_time2 - date_time1
 
-print("Original difference:", difference)
-print("Final result:", final_res)
+for time in range(date_time1.hour, date_time2.hour):
+    # if night_start <= datetime.time(time, 0, 0) < night_end:
+    #     diff -= datetime.timedelta(hours=1)
+    
+    if time >= 0 and time < 6:
+        diff -= datetime.timedelta(hours=1)
+        
+print("Difference after removing night intervals (12 AM to 6 AM):", diff)

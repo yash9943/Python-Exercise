@@ -6,64 +6,61 @@ class BankAccount:
         self.balance = balance
         self.pin = pin
         
+        
     def check_pin(self):
         enter_pin = input("Enter your PIN: ")
         self.enter_pin = int(enter_pin)
         if self.enter_pin == self.pin:
-            return "PIN Verified",self.holder_name, self.acc_number
+            return True
         else:
-            return "Invalid PIN",self.holder_name, self.acc_number
+            return False
         
     try:
         def deposit(self,amount):
-            print("You are in deposit function")
-            user_pin = input("Enter your PIN: ")
-            self.user_pin = user_pin
-            # print(self.user_pin)
-            if self.user_pin != self.pin:
-                # print("Invalid PIN")
-                return "Invalid PIN",self.holder_name, self.acc_number
-            else:
-                # print("PIN Verified")
+            pin_verification = account.check_pin()
+            if pin_verification == True:
+                # print("You are in if block of deposit function")
                 self.amount = amount
                 self.balance += self.amount
                 print(f"{self.amount} rupees are successfully added to your account : {self.balance} = {self.balance - self.amount} + {self.amount} rupees")
+            else:
+                # print("You are in else block of deposit function")
+                print("Invalid PIN")
     except:
         print("An error occurred during deposit.")
                 
     try:
         def withdraw(self, amount):
-            print("You are in withdraw function")
-            user_pin = input("Enter your PIN: ")
-            self.user_pin = user_pin
-            if self.user_pin != self.user_pin:
-                return "Invalid PIN",self.holder_name, self.acc_number
-            else:
+            pin_verification = account.check_pin()
+            if pin_verification == True:
                 self.amount = amount
                 if self.amount > self.balance:
                     print("\nYour account don’t have sufficient balance ")
                 else:
                     self.balance -= self.amount
                     print(f"{self.amount} rupees are successfully withdrawn from your account : {self.balance} = {self.balance + self.amount} - {self.amount} rupees")
+            else:
+                print("Invalid PIN")
+
     except:
         print("An error occurred during withdrawal.")
-    
     
     def __str__(self):
         return f"Account Holder Name: {self.holder_name}\nAccount Number: {self.acc_number}\nAccount Balance: {self.balance} rupees"
         
 
-account = BankAccount("Ram Kumar", "1234567890", 10000, "4321")
+account = BankAccount("Ram Kumar", "1234567890", 10000, 4321)
 
-# print(account)
-print()
+print("---Account Details---")
+
+print(account)
+print("---Deposit---")
 account.deposit(200)
 print()
 print(account)
-print()
+print("---Withdraw---")
 account.withdraw(12000)
 print()
 account.withdraw(8000)
 print()
 print(account)
-
